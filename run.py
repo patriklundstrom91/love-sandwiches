@@ -37,7 +37,7 @@ def get_sales_data():
 def validate_data(values):
     """
     Inside the try, converts all strings to integers. 
-    Raises ValueError if strings cannot be converted into int, or if thre isn't exactly 6 values
+    Raises ValueError if strings cannot be converted into int, or if there isn't exactly 6 values
     """
     try:
         [int(value) for value in values]
@@ -78,6 +78,19 @@ def calculate_surplus_data(sales_row):
 
     return surplus_data
 
+def get_last_5_entries_sales():
+    """
+    Collects collums of data from sales worksheet, collecting the last 5 entries 
+    from each sandwich and returns the data as a list of lists.
+    """
+    sales = SHEET.worksheet("sales")
+    columns = []
+
+    for ind in range(1,7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+    return columns
+
 
 def main():
     """
@@ -91,4 +104,5 @@ def main():
     
 
 print("Welcome to Love Sandwiches Data Automation")
-main()
+#main()
+sales_columns = get_last_5_entries_sales()
